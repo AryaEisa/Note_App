@@ -12,12 +12,22 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.note_app.screens.ListView
+import com.example.note_app.screens.Objekt
+import com.example.note_app.screens.Screen
+import com.example.note_app.screens.detailScreen
+import com.example.note_app.screens.detailScreen
+import com.example.note_app.screens.edit
 import com.example.note_app.ui.theme.Note_AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
             val list = remember { mutableStateListOf<Objekt>()}
             Note_AppTheme {
                 // A surface container using the 'background' color from the theme
@@ -26,7 +36,20 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen(list = list)
+                   NavHost(navController = navController, startDestination = Screen.Home.route){
+
+                       composable(route = Screen.Home.route){
+                           detailScreen(list = list, navController = navController)
+                       }
+                       composable(route = Screen.Detail.route){
+                           ListView(list = list, navController = navController)
+                       }
+                       composable(route = Screen.Edit.route){
+                           edit(list = list, navController = navController)
+                       }
+                   }
+                    
+                //MainScreen(list = list)
                 }
             }
         }
