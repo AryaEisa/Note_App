@@ -12,6 +12,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -22,10 +23,6 @@ import androidx.navigation.NavController
 
 @Composable
 fun edit(list: MutableList<Objekt>, navController: NavController) {
-    var text by rememberSaveable { mutableStateOf("") }
-    var title by rememberSaveable { mutableStateOf("") }
-    var Edittext by rememberSaveable { mutableStateOf(false) }
-    var Edittitle by rememberSaveable { mutableStateOf(false) }
     Column {
         Row {
             Button(onClick = { navController.navigateUp()}) {
@@ -34,19 +31,37 @@ fun edit(list: MutableList<Objekt>, navController: NavController) {
         }
         LazyColumn {
             items(list) { thisObject ->
+                var isEditingText by remember { mutableStateOf(false) }
+                var isEditingTitle by remember { mutableStateOf(false) }
+                var updateText by remember { mutableStateOf(thisObject.text) }
+                var updateTitle by remember { mutableStateOf(thisObject.title) }
                 Row {
                     Column(modifier = Modifier.padding(40.dp)) {
                         Column {
                             Row {
-                                    Button(onClick = {
-                                        Edittext
-                                    }) {
-                                        Text(text = "Edit")
-                                    }
+                                   if (isEditingText){
+                                       TextField(value = updateText, onValueChange = {updateText= it })
+
+                                   }else {
+                                       Text(text = updateText)
+                                   }
+                                if (isEditingTitle){
+                                    TextField(value = updateTitle, onValueChange ={updateTitle=it} )
+                                }else {
+                                    Text(text = updateTitle)
+                                }
+                                Button(onClick = { isEditingText=!isEditingText}.also { isEditingTitle=!isEditingTitle }) {
+                                    Text(text = if (isEditingText && isEditingTitle)  "Save" else "Edit")
+                                    list.add(Objekt(text = updateText, title = updateTitle))
+                                    println(list)
+                                    updateTitle=""
+                                    updateText=""
+                                    
+                                }
                                 }
 
                             }
-                            Row {
+
 
                             }
 
@@ -57,5 +72,5 @@ fun edit(list: MutableList<Objekt>, navController: NavController) {
 
             }
         }
-    }
+
 
