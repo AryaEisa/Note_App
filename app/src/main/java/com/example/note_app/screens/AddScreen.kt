@@ -1,7 +1,6 @@
 package com.example.note_app.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -65,11 +64,12 @@ Column (modifier = Modifier
                         Button(onClick = {list.remove(ThisObject)}) {
                             Text(text = "Delete")
                         }
-                        Button(onClick = { navController.navigate(Screen.showNote.route)}) {
+                        Button(onClick = {
+                            navController.navigate(Screen.showNote.route)})
+                            {
                             Text(text = "Read")
                         }
 
-                            }
                         }
                     }
                 }
@@ -77,6 +77,8 @@ Column (modifier = Modifier
         }
     }
 }
+}
+
 
 
 

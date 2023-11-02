@@ -10,13 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import java.util.UUID
+
+
+
 
 data class Objekt(
-var text: String,
-val id: String = UUID.randomUUID().toString(),
-var title: String,
- var body: String=""
+    var title: String, var text: String
 )
 
 @Composable
@@ -37,7 +36,7 @@ fun headScreen(){
                 ListView(list = list, navController = navController)
             }
             composable(route = Screen.Edit.route){
-                edit(list, navController = navController )
+                edit( navController = navController , list)
             }
             composable(route=Screen.showNote.route){
                 showNote(list, navController = navController)

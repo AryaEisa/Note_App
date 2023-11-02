@@ -1,10 +1,9 @@
 package com.example.note_app.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,19 +15,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import java.util.UUID
 
 @Composable
-fun edit(mutableList: MutableList<Objekt>, navController: NavController) {
+fun edit( navController: NavController, mutableList: MutableList<Objekt>) {
 
     Column {
         Row (modifier = Modifier
@@ -67,7 +62,7 @@ fun edit(mutableList: MutableList<Objekt>, navController: NavController) {
                         onClick = {
                             selectText?.let { Tobjekt ->
                                 Tobjekt.title = editTitle
-                                Tobjekt.text =editText
+                                Tobjekt.text = editText
                             }
                             editTitle=""
                             editText=""
@@ -80,14 +75,28 @@ fun edit(mutableList: MutableList<Objekt>, navController: NavController) {
 
 
         else {
-        LazyColumn{
+        LazyColumn(modifier = Modifier
+            .padding(16.dp)
+            .background(color = Color.DarkGray)
+            .fillMaxWidth()
+            .fillMaxHeight()){
             items(mutableList){
                 tObjekt ->
-                Column {
-                    Text(text = tObjekt.title)
-                    Text(text = tObjekt.text)
+                Column(modifier = Modifier
+                    .padding(16.dp)
+                    .background(color = Color.Black)
+                    .fillMaxWidth()) {
+                    Row {
+                        Text(text = "Title: ", style = TextStyle(color = Color.White))
+                        Text(text = tObjekt.title, style = TextStyle(color = Color.White))
+                    }
+                    Row {
+                        Text(text = "Note: ", style = TextStyle(color = Color.White))
+                        Text(text = tObjekt.text,  style = TextStyle(color = Color.White))
+                    }
+
                 }
-                Column {
+                Row {
                     Button(
                         onClick = {
                             selectText = tObjekt
