@@ -45,6 +45,7 @@ fun edit(list: MutableList<Objekt>, navController: NavController) {
                                     TextField(
                                         value = updateTitle,
                                         onValueChange = { updateTitle = it },
+                                        maxLines = 5,
                                         label = { Text(text = "Title: ")})
                                 } else {
                                     Row {
@@ -62,6 +63,7 @@ fun edit(list: MutableList<Objekt>, navController: NavController) {
                                     TextField(
                                         value = updateText,
                                         onValueChange = { updateText = it },
+                                        maxLines = 10,
                                         label = { Text(text = "Text: ")}
                                     )
                                 } else {

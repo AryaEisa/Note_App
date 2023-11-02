@@ -42,7 +42,10 @@ fun List(list: MutableList<Objekt>, navController: NavController) {
     ){
         Column {
             TextField(value = title, onValueChange = { NewTitle ->
-                title=NewTitle
+
+                        title=NewTitle
+
+                
             }, label = { Text(text = "Tiltle: ") }
             )
             TextField(value = text, onValueChange = { NewText ->
