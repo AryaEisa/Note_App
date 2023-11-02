@@ -20,36 +20,52 @@ import androidx.navigation.NavController
 @Composable
 fun ListView(list: MutableList<Objekt>, navController: NavController) {
 
-Column {
-    Row {
+Column (modifier = Modifier
+    .padding(16.dp)
+    .background(color = Color.DarkGray)
+    .fillMaxSize()) {
+    Row (modifier = Modifier.padding(16.dp)){
         Button(onClick = { navController.navigate(Screen.Home.route) }) {
             Text(text = "Back")
+        }
+            Row {
+                Button(onClick = { navController.navigate(Screen.Edit.route)}) {
+                    Text(text = "open-for-edit")
+
+                }
+
+
         }
     }
     LazyColumn{
         items(list){ThisObject ->
             Row {
-                Column (modifier = Modifier.padding(10.dp).background(Color.LightGray)){
+                Column (modifier = Modifier
+                    .padding(10.dp)
+                    .background(Color.LightGray)){
 
                     Column {
                         Row {
                             Text(text = "Title: ")
-                            Text(text = ThisObject.title, style = TextStyle(color = Color.White), modifier = Modifier.background(
-                                Color.Black).fillMaxSize() )
+                            Text(text = ThisObject.title, style = TextStyle(color = Color.White), modifier = Modifier
+                                .background(
+                                    Color.Black
+                                )
+                                .fillMaxSize() )
                         }
                         Row {
                             Text(text = "Note: ")
-                            Text(text = ThisObject.text, style = TextStyle(color = Color.White), modifier = Modifier.background(
-                                Color.Black).fillMaxSize() )
+                            Text(text = ThisObject.text, style = TextStyle(color = Color.White), modifier = Modifier
+                                .background(
+                                    Color.Black
+                                )
+                                .fillMaxSize() )
                         }
                     Row {
                         Button(onClick = {list.remove(ThisObject)}) {
                             Text(text = "Delete")
                         }
-                        Button(onClick = { navController.navigate(Screen.Edit.route)}) {
-                            Text(text = "Edit")
 
-                                 }
                             }
                         }
                     }

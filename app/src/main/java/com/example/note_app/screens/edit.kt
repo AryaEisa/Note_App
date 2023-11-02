@@ -22,82 +22,78 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import java.util.UUID
 
 @Composable
-fun edit(list: MutableList<Objekt>, navController: NavController) {
+fun edit(mutableList: MutableList<Objekt>, navController: NavController) {
+
     Column {
         Row {
             Button(onClick = { navController.navigateUp() }) {
                 Text(text = "Back")
             }
         }
-        LazyColumn {
-            items(list) { thisObject ->
-                var isEditingText by remember { mutableStateOf(false) }
-                var isEditingTitle by remember { mutableStateOf(false) }
-                var updateText by remember { mutableStateOf(thisObject.text) }
-                var updateTitle by remember { mutableStateOf(thisObject.title) }
-                Row {
-                    Column(modifier = Modifier.padding(40.dp)) {
-                        Column {
-                            Column (modifier = Modifier.padding(30.dp)){
 
+        //LazyColumn {
 
-                                if (isEditingTitle) {
-                                    TextField(
-                                        value = updateTitle,
-                                        onValueChange = { updateTitle = it },
-                                        maxLines = 5,
-                                        label = { Text(text = "Title: ")})
-                                } else {
-                                    Row {
-                                        Text(text = "Title: ")
-                                        Text(text = updateTitle)
-                                    }
-                                    
-                                }
-
-                                Button(onClick = { isEditingTitle = !isEditingTitle}) {
-                                    Text(text = if (isEditingTitle) "Save" else "Edit",style = TextStyle(color = Color.Red))
-                                }
-                                
-                                if (isEditingText ) {
-                                    TextField(
-                                        value = updateText,
-                                        onValueChange = { updateText = it },
-                                        maxLines = 10,
-                                        label = { Text(text = "Text: ")}
-                                    )
-                                } else {
-                                    Row {
-                                        Text(text = "Text: ")
-                                        Text(text = updateText )
-                                    }
-                                    
-                                }
-                                    Button(onClick = { isEditingText = !isEditingText }) {
-                                        Text(text = if (isEditingText) "Save" else "Edit", style = TextStyle(color = Color.Red))
-                                    }
-                                Row {
-                                    Button(onClick = { navController.navigateUp() }) {
-                                        Text(text = "Back-to-notes")
-                                    }
-                                }
-                            }
+                var selectText by remember { mutableStateOf<Objekt?>(null) }
+                var editTitle by remember { mutableStateOf("") }
+                var editText by remember { mutableStateOf("") }
+        if (selectText !=null) {
+            Column {
+                TextField(
+                    value = editTitle,
+                    onValueChange = {editTitle = it},
+                    maxLines = 4,
+                    label = { Text(text = "Title: ")}
+                )
+                TextField(
+                    value = editText,
+                    onValueChange = {editText = it},
+                    maxLines = 10,
+                    label = { Text(text = "Note: ")}
+                )
+                Button(
+                    onClick = {
+                        selectText?.let { Tobjekt ->
+                            Tobjekt.title = editTitle
+                            Tobjekt.text =editText
                         }
-                    }
-                }
-                if (isEditingTitle || isEditingText){
-                    //val updateObject = list.find { it == thisObject }
-                    //updateObject?.text = updateText
-                    //updateObject?.title = updateTitle
-                    thisObject.title=updateTitle
-                    thisObject.text=updateText
+                        editTitle=""
+                        editText=""
+                        selectText=null
+                    }) {
+                    Text(text = "Save")
                 }
             }
-
+        }
+        else {
+        LazyColumn{
+            items(mutableList){
+                tObjekt ->
+                Column {
+                    Text(text = tObjekt.title)
+                    Text(text = tObjekt.text)
+                }
+                Button(
+                    onClick = { 
+                        selectText = tObjekt
+                        editTitle = tObjekt.title
+                        editText = tObjekt.text
+                    }) {
+                    Text(text = "Edit")
+                }
+                Button(
+                    onClick = { 
+                        mutableList.remove(tObjekt)
+                    }) {
+                    Text(text = "Delete")
+                    
+                }
+            }
         }
 
+        }
     }
 }
 

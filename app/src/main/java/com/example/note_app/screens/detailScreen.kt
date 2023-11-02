@@ -22,7 +22,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
-class Objekt(var title: String, var text: String)
+
 @Composable
 fun detailScreen(list: MutableList<Objekt>, modifier: Modifier = Modifier, navController: NavController) {
 
@@ -54,7 +54,7 @@ fun List(list: MutableList<Objekt>, navController: NavController) {
             )
     Row {
         Button(onClick = {
-            list.add(Objekt(title=title, text=text))
+            list.add(Objekt(title=title, text =text))
             println(list)
             title=""
             text=""
