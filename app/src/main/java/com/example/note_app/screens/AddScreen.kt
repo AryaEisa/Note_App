@@ -65,6 +65,9 @@ Column (modifier = Modifier
                         Button(onClick = {list.remove(ThisObject)}) {
                             Text(text = "Delete")
                         }
+                        Button(onClick = { navController.navigate(Screen.showNote.route)}) {
+                            Text(text = "Read")
+                        }
 
                             }
                         }

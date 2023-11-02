@@ -1,8 +1,11 @@
 package com.example.note_app.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -28,7 +31,11 @@ import java.util.UUID
 fun edit(mutableList: MutableList<Objekt>, navController: NavController) {
 
     Column {
-        Row {
+        Row (modifier = Modifier
+            .padding(16.dp)
+            .background(color = Color.DarkGray)
+            .fillMaxWidth()
+        ){
             Button(onClick = { navController.navigateUp() }) {
                 Text(text = "Back")
             }
@@ -41,32 +48,37 @@ fun edit(mutableList: MutableList<Objekt>, navController: NavController) {
                 var editText by remember { mutableStateOf("") }
         if (selectText !=null) {
             Column {
-                TextField(
-                    value = editTitle,
-                    onValueChange = {editTitle = it},
-                    maxLines = 4,
-                    label = { Text(text = "Title: ")}
-                )
-                TextField(
-                    value = editText,
-                    onValueChange = {editText = it},
-                    maxLines = 10,
-                    label = { Text(text = "Note: ")}
-                )
-                Button(
-                    onClick = {
-                        selectText?.let { Tobjekt ->
-                            Tobjekt.title = editTitle
-                            Tobjekt.text =editText
-                        }
-                        editTitle=""
-                        editText=""
-                        selectText=null
-                    }) {
-                    Text(text = "Save")
+
+                    TextField(
+                        value = editTitle,
+                        onValueChange = {editTitle = it},
+                        maxLines = 4,
+                        label = { Text(text = "Title: ")}
+                    )
+
+                        TextField(
+                            value = editText,
+                            onValueChange = { editText = it },
+                            maxLines = 10,
+                            label = { Text(text = "Note: ") }
+                        )
+
+                    Button(
+                        onClick = {
+                            selectText?.let { Tobjekt ->
+                                Tobjekt.title = editTitle
+                                Tobjekt.text =editText
+                            }
+                            editTitle=""
+                            editText=""
+                            selectText=null
+                        }) {
+                        Text(text = "Save")
+                    }
                 }
             }
-        }
+
+
         else {
         LazyColumn{
             items(mutableList){
@@ -75,21 +87,24 @@ fun edit(mutableList: MutableList<Objekt>, navController: NavController) {
                     Text(text = tObjekt.title)
                     Text(text = tObjekt.text)
                 }
-                Button(
-                    onClick = { 
-                        selectText = tObjekt
-                        editTitle = tObjekt.title
-                        editText = tObjekt.text
-                    }) {
-                    Text(text = "Edit")
+                Column {
+                    Button(
+                        onClick = {
+                            selectText = tObjekt
+                            editTitle = tObjekt.title
+                            editText = tObjekt.text
+                        }) {
+                        Text(text = "Edit")
+                    }
+                    Button(
+                        onClick = {
+                            mutableList.remove(tObjekt)
+                        }) {
+                        Text(text = "Delete")
+
+                    }
                 }
-                Button(
-                    onClick = { 
-                        mutableList.remove(tObjekt)
-                    }) {
-                    Text(text = "Delete")
-                    
-                }
+
             }
         }
 

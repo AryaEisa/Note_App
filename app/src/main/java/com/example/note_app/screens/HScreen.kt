@@ -39,6 +39,9 @@ fun headScreen(){
             composable(route = Screen.Edit.route){
                 edit(list, navController = navController )
             }
+            composable(route=Screen.showNote.route){
+                showNote(list, navController = navController)
+            }
         }
 
         //MainScreen(list = list)
