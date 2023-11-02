@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 fun edit(list: MutableList<Objekt>, navController: NavController) {
     Column {
         Row {
-            Button(onClick = { navController.navigateUp()}) {
+            Button(onClick = { navController.navigateUp() }) {
                 Text(text = "Back")
             }
         }
@@ -38,39 +38,62 @@ fun edit(list: MutableList<Objekt>, navController: NavController) {
                 Row {
                     Column(modifier = Modifier.padding(40.dp)) {
                         Column {
-                            Row {
-                                   if (isEditingText){
-                                       TextField(value = updateText, onValueChange = {updateText= it })
+                            Column (modifier = Modifier.padding(30.dp)){
 
-                                   }else {
-                                       Text(text = updateText)
-                                   }
-                                if (isEditingTitle){
-                                    TextField(value = updateTitle, onValueChange ={updateTitle=it} )
-                                }else {
-                                    Text(text = updateTitle)
-                                }
-                                Button(onClick = { isEditingText=!isEditingText}.also { isEditingTitle=!isEditingTitle }) {
-                                    Text(text = if (isEditingText && isEditingTitle)  "Save" else "Edit")
-                                    list.add(Objekt(text = updateText, title = updateTitle))
-                                    println(list)
-                                    updateTitle=""
-                                    updateText=""
+
+                                if (isEditingTitle) {
+                                    TextField(
+                                        value = updateTitle,
+                                        onValueChange = { updateTitle = it },
+                                        label = { Text(text = "Title: ")})
+                                } else {
+                                    Row {
+                                        Text(text = "Title: ")
+                                        Text(text = updateTitle)
+                                    }
                                     
                                 }
+
+                                Button(onClick = { isEditingTitle = !isEditingTitle}) {
+                                    Text(text = if (isEditingTitle) "Save" else "Edit",style = TextStyle(color = Color.Red))
                                 }
-
+                                
+                                if (isEditingText) {
+                                    TextField(
+                                        value = updateText,
+                                        onValueChange = { updateText = it },
+                                        label = { Text(text = "Text: ")}
+                                    )
+                                } else {
+                                    Row {
+                                        Text(text = "Text: ")
+                                        Text(text = updateText)
+                                    }
+                                    
+                                }
+                                    Button(onClick = { isEditingText = !isEditingText }) {
+                                        Text(text = if (isEditingText) "Save" else "Edit", style = TextStyle(color = Color.Red))
+                                    }
+                                Row {
+                                    Button(onClick = { navController.navigateUp() }) {
+                                        Text(text = "Back-to-notes")
+                                    }
+                                }
                             }
-
-
-                            }
-
                         }
                     }
-
                 }
-
+                if (isEditingTitle || isEditingText){
+                    val updateObject = list.find { it == thisObject }
+                    updateObject?.text = updateText
+                    updateObject?.title = updateTitle
+                }
             }
+
         }
+
+    }
+}
+
 
 
