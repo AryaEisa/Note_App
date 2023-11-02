@@ -40,7 +40,7 @@ fun List(list: MutableList<Objekt>, navController: NavController) {
     Column (modifier = Modifier
         .padding(3.dp)
     ){
-        Column {
+        Column (modifier = Modifier.background(androidx.compose.ui.graphics.Color.Gray).fillMaxSize()){
             TextField(value = title, onValueChange = { NewTitle ->
 
                         title=NewTitle

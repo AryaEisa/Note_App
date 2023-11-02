@@ -52,6 +52,9 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+ Note_AppTheme {
+     headScreen()
 
-    headScreen()
+ }
+
 }

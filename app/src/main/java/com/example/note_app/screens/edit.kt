@@ -18,6 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
@@ -59,7 +61,7 @@ fun edit(list: MutableList<Objekt>, navController: NavController) {
                                     Text(text = if (isEditingTitle) "Save" else "Edit",style = TextStyle(color = Color.Red))
                                 }
                                 
-                                if (isEditingText) {
+                                if (isEditingText ) {
                                     TextField(
                                         value = updateText,
                                         onValueChange = { updateText = it },
@@ -69,7 +71,7 @@ fun edit(list: MutableList<Objekt>, navController: NavController) {
                                 } else {
                                     Row {
                                         Text(text = "Text: ")
-                                        Text(text = updateText)
+                                        Text(text = updateText )
                                     }
                                     
                                 }
@@ -86,9 +88,11 @@ fun edit(list: MutableList<Objekt>, navController: NavController) {
                     }
                 }
                 if (isEditingTitle || isEditingText){
-                    val updateObject = list.find { it == thisObject }
-                    updateObject?.text = updateText
-                    updateObject?.title = updateTitle
+                    //val updateObject = list.find { it == thisObject }
+                    //updateObject?.text = updateText
+                    //updateObject?.title = updateTitle
+                    thisObject.title=updateTitle
+                    thisObject.text=updateText
                 }
             }
 

@@ -29,16 +29,18 @@ Column {
     LazyColumn{
         items(list){ThisObject ->
             Row {
-                Column (modifier = Modifier.padding(40.dp)){
+                Column (modifier = Modifier.padding(10.dp).background(Color.LightGray)){
 
                     Column {
                         Row {
                             Text(text = "Title: ")
-                            Text(text = ThisObject.title, style = TextStyle(color = Color.Blue) )
+                            Text(text = ThisObject.title, style = TextStyle(color = Color.White), modifier = Modifier.background(
+                                Color.Black).fillMaxSize() )
                         }
                         Row {
                             Text(text = "Note: ")
-                            Text(text = ThisObject.text, style = TextStyle(color = Color.Blue) )
+                            Text(text = ThisObject.text, style = TextStyle(color = Color.White), modifier = Modifier.background(
+                                Color.Black).fillMaxSize() )
                         }
                     Row {
                         Button(onClick = {list.remove(ThisObject)}) {
