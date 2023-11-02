@@ -21,6 +21,7 @@ import com.example.note_app.screens.Screen
 import com.example.note_app.screens.detailScreen
 import com.example.note_app.screens.detailScreen
 import com.example.note_app.screens.edit
+import com.example.note_app.screens.headScreen
 import com.example.note_app.ui.theme.Note_AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,17 +37,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   NavHost(navController = navController, startDestination = Screen.Home.route){
-
-                       composable(route = Screen.Home.route){
-                           detailScreen(list = list, navController = navController)
-                       }
-                       composable(route = Screen.Detail.route){
-                           ListView(list = list, navController = navController)
-                       }
-                       composable(route = Screen.Edit.route){
-                           edit(list = list, navController = navController)
-                       }
+                   GreetingPreview()
                    }
                     
                 //MainScreen(list = list)
@@ -54,14 +45,13 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
+
 
 
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    Note_AppTheme {
-        
-    }
+
+    headScreen()
 }
