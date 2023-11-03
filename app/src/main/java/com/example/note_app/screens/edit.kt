@@ -105,13 +105,7 @@ fun edit( navController: NavController, mutableList: MutableList<Objekt>) {
                         }) {
                         Text(text = "Edit")
                     }
-                    Button(
-                        onClick = {
-                            mutableList.remove(tObjekt)
-                        }) {
-                        Text(text = "Delete")
 
-                    }
                 }
 
             }

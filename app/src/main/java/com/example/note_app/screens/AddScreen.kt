@@ -65,7 +65,7 @@ Column (modifier = Modifier
                             Text(text = "Delete")
                         }
                         Button(onClick = {
-                            navController.navigate(Screen.showNote.route)})
+                            navController.navigate(Screen.showNote.route )})
                             {
                             Text(text = "Read")
                         }
