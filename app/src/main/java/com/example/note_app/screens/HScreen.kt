@@ -39,8 +39,7 @@ fun headScreen(){
                 edit( navController = navController , list)
             }
             composable(route = Screen.showNote.route) {
-                val selectedObject = Object()
-                showNote(list, navController = navController)
+                showNote(navController = navController , list)
             }
 
         }

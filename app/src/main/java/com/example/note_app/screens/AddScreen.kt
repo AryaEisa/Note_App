@@ -32,6 +32,13 @@ Column (modifier = Modifier
                     Text(text = "open-for-edit")
 
                 }
+                Row {
+                    Button(onClick = {
+                        navController.navigate(Screen.showNote.route )})
+                    {
+                        Text(text = "List")
+                    }
+                }
 
 
         }
@@ -64,11 +71,7 @@ Column (modifier = Modifier
                         Button(onClick = {list.remove(ThisObject)}) {
                             Text(text = "Delete")
                         }
-                        Button(onClick = {
-                            navController.navigate(Screen.showNote.route )})
-                            {
-                            Text(text = "Read")
-                        }
+
 
                         }
                     }
