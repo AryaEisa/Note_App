@@ -27,7 +27,10 @@ fun headScreen(){
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        NavHost(navController = navController, startDestination = Screen.Home.route){
+        NavHost(navController = navController, startDestination = Screen.StartPage.route){
+            composable(route = Screen.StartPage.route){
+                StartPage(navController = navController)
+            }
 
             composable(route = Screen.Home.route){
                 detailScreen(list = list, navController = navController)

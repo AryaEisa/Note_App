@@ -32,9 +32,10 @@ fun edit( navController: NavController, mutableList: MutableList<Objekt>) {
 
     Column {
         Row (modifier = Modifier
-            .padding(16.dp)
+
             .background(color = Color.DarkGray)
             .fillMaxWidth()
+            .padding(16.dp)
         ){
             Button(onClick = { navController.navigateUp() }) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
@@ -62,19 +63,27 @@ fun edit( navController: NavController, mutableList: MutableList<Objekt>) {
                             maxLines = 10,
                             label = { Text(text = "Note: ") }
                         )
-
-                    Button(
-                        onClick = {
-                            selectText?.let { Tobjekt ->
-                                Tobjekt.title = editTitle
-                                Tobjekt.text = editText
-                            }
-                            editTitle=""
-                            editText=""
-                            selectText=null
-                        }) {
-                        Icon(imageVector = Icons.Default.Check, contentDescription = null)
+                if (editTitle.length > 3 && editText.length < 120){
+                    if (editTitle.length<50){
+                        Button(
+                            onClick = {
+                                selectText?.let { Tobjekt ->
+                                    Tobjekt.title = editTitle
+                                    Tobjekt.text = editText
+                                }
+                                editTitle=""
+                                editText=""
+                                selectText=null
+                            }) {
+                            Icon(imageVector = Icons.Default.Check, contentDescription = null)
+                        }
+                    }else {
+                        Text(text = "Sorry, your title can't be bigger then 50 characters")
                     }
+                }else{
+                    Text(text = "Sorry your title has to be larger then 3 characters and your note can't be larger then 120 characters")
+                }
+
                 }
             }
 
