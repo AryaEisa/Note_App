@@ -8,7 +8,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -32,7 +37,7 @@ fun edit( navController: NavController, mutableList: MutableList<Objekt>) {
             .fillMaxWidth()
         ){
             Button(onClick = { navController.navigateUp() }) {
-                Text(text = "Back")
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
             }
         }
 
@@ -68,7 +73,7 @@ fun edit( navController: NavController, mutableList: MutableList<Objekt>) {
                             editText=""
                             selectText=null
                         }) {
-                        Text(text = "Save")
+                        Icon(imageVector = Icons.Default.Check, contentDescription = null)
                     }
                 }
             }
@@ -103,7 +108,7 @@ fun edit( navController: NavController, mutableList: MutableList<Objekt>) {
                             editTitle = tObjekt.title
                             editText = tObjekt.text
                         }) {
-                        Text(text = "Edit")
+                        Icon(imageVector = Icons.Default.Create, contentDescription = null)
                     }
 
                 }

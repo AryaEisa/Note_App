@@ -8,7 +8,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,7 +38,7 @@ var selectText by remember { mutableStateOf<Objekt?>(null) }
                 .fillMaxWidth()
         ) {
             Button(onClick = { navController.navigate(Screen.Detail.route) }) {
-                Text(text = "Back")
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
             }
         }
         if (selectText !=null){
@@ -52,7 +57,7 @@ var selectText by remember { mutableStateOf<Objekt?>(null) }
                 Button(onClick = {
                     navController.navigate(Screen.showNote.route )})
                 {
-                    Text(text = "List")
+                    Icon(imageVector = Icons.Default.List, contentDescription = null)
                 }
             }
         }
@@ -86,7 +91,7 @@ var selectText by remember { mutableStateOf<Objekt?>(null) }
                                 Button(onClick = {
                                     selectText = tObjekt
                                 }) {
-                                    Text(text = "Read")
+                                    Icon(imageVector = Icons.Default.Info, contentDescription = null)
                                 }
                             }
                         }
