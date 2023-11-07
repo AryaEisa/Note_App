@@ -31,7 +31,7 @@ Column (modifier = Modifier
     .background(color = Color.DarkGray)
     .fillMaxSize()) {
     Row (modifier = Modifier.padding(16.dp)){
-        Button(onClick = { navController.navigate(Screen.Home.route) }) {
+        Button(onClick = { navController.navigateUp() }) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
         }
             Row {

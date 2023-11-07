@@ -47,7 +47,7 @@ fun List(list: MutableList<Objekt>, navController: NavController) {
             .background(color = Color.Black)
             .fillMaxWidth()
     ){
-        Button(onClick = { navController.navigate(Screen.StartPage.route) }) {
+        Button(onClick = { navController.navigateUp() }) {
             Icon(imageVector = Icons.Default.Close, contentDescription = "close" )
 
         }

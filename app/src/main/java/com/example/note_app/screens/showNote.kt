@@ -38,7 +38,7 @@ var selectText by remember { mutableStateOf<Objekt?>(null) }
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Button(onClick = { navController.navigate(Screen.Detail.route) }) {
+            Button(onClick = { navController.navigateUp() }) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
             }
         }
